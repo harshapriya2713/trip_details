@@ -1,0 +1,38 @@
+body { 
+        background-image:url("https://img.freepik.com/premium-vector/time-travel-background-cartoon-design-top-view-wallpaper-with-composition-passport_198565-2071.jpg?w=996");
+        background-position: center;
+        background-size: cover;
+        opacity:0.8;
+        margin : 0;
+        padding: 0;
+    }
+    button {
+        justify-content: space-between;
+        background-color: #3e8f6d;
+        border-radius: 4px;
+        padding: 10px;
+        text-align: center;
+    }
+    .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color:rgb(233, 229, 230);
+            opacity:0.8;
+            padding:10px 15px;
+            border-radius:5px;
+            
+    }
+    h1 {
+            text-align: center;
+            color: #ac256b;
+    }
+    label {
+        color:black;
+    }  
+    form{
+        display:grid;
+        gap: 15px;
+    }
+    marquee {
+        color:chocolate;
+    }
