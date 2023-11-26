@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+    body { 
+        background-image:url("https://img.freepik.com/premium-vector/time-travel-background-cartoon-design-top-view-wallpaper-with-composition-passport_198565-2071.jpg?w=996");
+        background-position: center;
+        background-size: cover;
+        opacity:0.8;
+        margin : 0;
+        padding: 0;
+    }
+    button {
+        justify-content: space-between;
+        background-color: #3e8f6d;
+        border-radius: 4px;
+        padding: 10px;
+        text-align: center;
+    }
+    .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color:rgb(233, 229, 230);
+            opacity:0.8;
+            padding:10px 15px;
+            border-radius:5px;
+            
+    }
+    h1 {
+            text-align: center;
+            color: #ac256b;
+    }
+    label {
+        color:black;
+    }  
+    form{
+        display:grid;
+        gap: 15px;
+    }
+    marquee {
+        color:chocolate;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>TRIP DETAILS</h1>
+    <marquee>Plan Your Journey, Capture Your Adventure..</marquee>
+    <form action = "trip_form.php" method = "POST">
+        
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="Full_Name" required>
+       
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="Phone_Number" name="Phone_Number" placeholder="123-45-678" required>
+
+        <label for="email">Email:</label>
+        <input type = "email" name="Email" required>
+
+        <label for="Destination">Destination:</label>
+        <input type="text" id="destination" name="Destination" required>
+
+        <label for="ModeOfTravel">Mode of Travel:</label>
+            <select id="modeOfTravel" name="Mode_Of_Travel" required>
+                <option value="airplane">Airplane</option>
+                <option value="train">Train</option>
+                <option value="car">Car</option>
+                <option value="other">Other</option>
+            </select>
+
+        <label for="PeopleCount">Count of People:</label>
+        <input type="number" id="peopleCount" name="Count_Of_People" required>
+
+        <label for="StartDate">Start Date:</label>
+        <input type="date" id="startDate" name="StartDate" required>
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="End_Date" required>
+
+        <label for="purposeOfTrip">Purpose of Trip:</label>
+        <select id="PurposeOfTrip" name="Purpose_Of_Trip" required>
+            <option value="Business meetings">Meetings</option>
+            <option value="training">Training</option>
+            <option value="vacation">Vacation</option>
+            <option value="healthcare">Healthcare Related</option>
+            <option value="familyEvents">Family Events</option>
+        </select>
+        
+        
+        <label for="Other facilities">Mention other  facilities:</label>
+        <input type ="text" name="Mention_Other_Facilities" required>
+        
+        <button type="submit">Submit</button>
+        </form>
+        <form action = "search_results.php" method="POST">
+        <label for="Search">Search:</label>
+        <input type="text" id="searchCriteria" name="searchCriteria" placeholder="Search">
+
+        <button type="submit" id="searchButton" name="button">Search</button>
+    </form>
+    </div>
+</body>
+</html>
