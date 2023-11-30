@@ -1,49 +1,71 @@
 <?php
-
-$host = 'localhost';
-$port = '5432'; 
-$user = 'postgres';
-$password = 'Chandaka@2627';
-$dbname = 'tripform';
+$host = "localhost";
+$port = "5432";
+$dbname = "tripform";
+$user = "postgres";
+$password = "Chandaka@2627";
 
 try {
     $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password");
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully"."<br>";
-} catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-}
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $searchCriteria = $_POST["searchCriteria"];
-    
-    $query = "SELECT * FROM trip_details WHERE full_name ILIKE :name";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(':name', $searchCriteria, PDO::PARAM_STR);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-    if (isset($result) && count($result) > 0) {
-        foreach ($result as $row) {
-        echo "<p>Full Name: " . $row['full_name'] . "</p>";
-        echo "<p>Phone Number: " . $row['phone_number'] . "</p>";
-        echo "<p>Email: " . $row['email'] . "</p>";
-        echo "<p>Destination: " . $row['destination'] . "</p>";
-        echo "<p>Mode Of Travel: ". $row['mode_of_travel'] . "</p>";
-        echo "<p>Count Of Travel: " . $row['count_of_people'] . "</p>";
-        echo "<p>Start Date: " . $row['startdate'] . "</p>";
-        echo "<p>End Date: " . $row['end_date'] . "</p>";
-        echo "<p>Purpose Of Trip: " . $row['purpose_of_trip'] . "</p>";
-        echo "<p>Mention Other Facilities: " . $row['mention_other_facilities'] . "</p>";
+
+    $sql_main = "SELECT * FROM trip_details WHERE full_name = :name";
+    $stmt_main = $conn->prepare($sql_main);
+    $stmt_main->bindParam(':name', $searchCriteria, PDO::PARAM_STR);
+    $stmt_main->execute();
+    $mainResult = $stmt_main->fetch(PDO::FETCH_ASSOC);
+
+    if ($mainResult) {
+        echo "ID: " . $mainResult['id'] . "<br>";
+        echo "Full Name: " . $mainResult['full_name'] . "<br>";
+        echo "Phone Number: " . $mainResult['phone_number'] . "<br>";
+        echo "Email: " . $mainResult['email'] . "<br>";
+        echo "Destination: " . $mainResult['destination'] . "<br>";
+        echo "Mode Of Travel: ". $mainResult['mode_of_travel'] . "<br";
+        echo "Count Of Travel: " . $mainResult['count_of_people'] . "<br>";
+        echo "Start Date: " . $mainResult['startdate'] . "<br>";
+        echo "End Date: " . $mainResult['end_date'] . "<br>";
+        echo "Purpose Of Trip: " . $mainResult['purpose_of_trip'] . "<br";
+        echo "Mention Other Facilities: " . $mainResult['mention_other_facilities'] . "<br>";
         echo "<hr>"; 
+
+        $sql_people = "SELECT * FROM trip_people WHERE full_name = :name";
+        $stmt_people = $conn->prepare($sql_people);
+        $stmt_people->bindParam(':name', $searchCriteria, PDO::PARAM_STR);
+        $stmt_people->execute();
+        $peopleResult = $stmt_people->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($peopleResult) {
+            foreach ($peopleResult as $person) {
+                echo "Person Name: " . $person['person_name'] . "<br>";
+                echo "<hr>";
+            }
+        }
+
+        $sql_purpose = "SELECT * FROM trip_purpose WHERE full_name = :name";
+        $stmt_purpose = $conn->prepare($sql_purpose);
+        $stmt_purpose->bindParam(':name', $searchCriteria, PDO::PARAM_STR);
+        $stmt_purpose->execute();
+        $purposeResult = $stmt_purpose->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($purposeResult) {
+            foreach ($purposeResult as $purpose) {
+                echo "Purpose Description: " . $purpose['purpose_description'] . "<br>";
+                echo "<hr>";
+            }
+        }
+    } else {
+        echo "No records found for the given full_name";
     }
-} else {
-    echo "No results";
+
+} catch (PDOException $e) {
+    echo 'Error: ' . $e->getMessage();
 }
-
-
-$conn = null;
 ?>
+
+
 
 
 
